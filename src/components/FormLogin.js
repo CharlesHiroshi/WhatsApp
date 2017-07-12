@@ -16,10 +16,12 @@ class FormLogin extends Component {
           style={{ flexDirection: 'column', flex: 2 }}
         >
           <Input 
+            value={this.props.email}
             label='E-mail'
             placeholder='email@email.com'
           />
           <Input 
+            value={this.props.senha}
             label='Senha'
             placeholder='Senha'
             secureTextEntry
