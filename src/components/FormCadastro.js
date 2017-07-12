@@ -5,12 +5,18 @@ import { Card, CardSection, Input, Button } from './common';
 import { 
   modificaEmail, 
   modificaSenha, 
-  modificaNome 
+  modificaNome,
+  cadastraUsuario
 } from '../actions/AutenticacaoActions';
 
 const bg = require('../imgs/bg.png');
 
 class FormCadastro extends Component {
+  _cadastraUsuario() {
+    const { nome, email, senha } = this.props;
+    this.props.cadastraUsuario({ nome, email, senha });
+  }
+
   render() {
     return (
       <ImageBackground style={{ flex: 1 }} source={bg}>
@@ -39,7 +45,7 @@ class FormCadastro extends Component {
             />
           </CardSection>
           <CardSection style={{ flexDirection: 'column', flex: 2 }}>
-            <Button onPress={() => false}>
+            <Button onPress={() => this._cadastraUsuario()}>
               Cadastrar
             </Button>
           </CardSection>
@@ -60,5 +66,6 @@ const mapStateToProps = state => (
 export default connect(mapStateToProps, { 
   modificaEmail, 
   modificaSenha, 
-  modificaNome })(FormCadastro)
-;
+  modificaNome,
+  cadastraUsuario 
+})(FormCadastro);

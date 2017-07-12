@@ -31,14 +31,14 @@ const styles = {
   inputStyle: {
     color: '#000',
     paddingRight: 5,
-    paddingLeft: 5,
+    paddingLeft: 1,
     fontSize: 20,
     lineHeight: 23,
-    flex: 2,
+    flex: 3,
   },
   labelStyle: {
     fontSize: 20,
-    paddingLeft: 20,
+    paddingLeft: 5,
     flex: 1,
   },
   containerStyle: {
