@@ -13,7 +13,7 @@ const style = {
     backgroundColor: '#FFF',
     flexDirection: 'row',
     position: 'relative',
-    justifyContent: 'flex-start'
+    justifyContent: 'center'
   }
 };
 

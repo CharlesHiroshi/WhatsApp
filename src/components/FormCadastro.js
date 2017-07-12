@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import { Card, CardSection, Input, Header, Button, Link } from './common';
+import { Card, CardSection, Input, Button } from './common';
 
-class FormLogin extends Component {
+class FormCadastro extends Component {
   render() {
     return (
       <Card>
-        <Header 
-          style={{ flex: 1 }}
-          headerText='WhatsApp' 
-        />
         <CardSection 
-          style={{ flexDirection: 'column', flex: 2 }}
+          style={{ flexDirection: 'column', flex: 3 }}
         >
+          <Input 
+            label='Nome'
+            placeholder='Nome'
+          />
           <Input 
             label='E-mail'
             placeholder='email@email.com'
@@ -21,13 +21,10 @@ class FormLogin extends Component {
             placeholder='Senha'
             secureTextEntry
           />
-          <Link onPress={() => false}>
-            Ainda não tem cadastro? Cadastre-se.
-          </Link>
         </CardSection>
         <CardSection style={{ flexDirection: 'column', flex: 2 }}>
           <Button onPress={() => false}>
-            Acessar
+            Cadastrar
           </Button>
         </CardSection>
       </Card>
@@ -35,4 +32,4 @@ class FormLogin extends Component {
   }
 }
 
-export default FormLogin;
+export default FormCadastro;
