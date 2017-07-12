@@ -7,34 +7,40 @@ import {
 } from './types';
 
 export const modificaEmail = (texto) => ({
-    type: MODIFICA_EMAIL,
-    payload: texto
+  type: MODIFICA_EMAIL,
+  payload: texto
 });
 
 export const modificaSenha = (texto) => ({
-    type: MODIFICA_SENHA,
-    payload: texto
+  type: MODIFICA_SENHA,
+  payload: texto
 });
 
 export const modificaNome = (texto) => ({
-    type: MODIFICA_NOME,
-    payload: texto
+  type: MODIFICA_NOME,
+  payload: texto
 });
 
 export const cadastraUsuario = ({ nome, email, senha }) => {
+  return dispatch => {
     firebase.auth().createUserWithEmailAndPassword(email, senha)
-    .then(user => console.log(user.uid))
-    .then(user => cadastroUsuarioSucesso())
-    .catch(erro => cadastroUsuarioErro(erro));
-    return {
-        type: 'teste'
-    };
+    .then(user => cadastroUsuarioSucesso(user.uid, dispatch))
+    .catch(erro => cadastroUsuarioErro(erro, dispatch));
+  };
 };
 
-const cadastroUsuarioSucesso = () => {
-    console.log('Usuário Cadastrado com sucesso!');
+const cadastroUsuarioSucesso = (dispatch) => {
+  dispatch(
+    {
+      type: 'sucesso'
+    }
+  );
 };
 
-const cadastroUsuarioErro = (erro) => {
-    console.log(erro);
+const cadastroUsuarioErro = (erro, dispatch) => {
+  dispatch(
+    {
+      type: 'erro'
+    }
+  );
 };
