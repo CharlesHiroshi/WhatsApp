@@ -4,7 +4,6 @@ import { Card, CardSection, Input, Button } from './common';
 
 class FormCadastro extends Component {
   render() {
-    console.log(this.props);
     return (
       <Card>
         <CardSection 

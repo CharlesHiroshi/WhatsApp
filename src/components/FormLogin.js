@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { Card, CardSection, Input, Header, Button, Link } from './common';
+import { modificaEmail, modificaSenha } from '../actions/AutenticacaoActions';
 
 class FormLogin extends Component {
   render() {
-    console.log(this.props);
     return (
       <Card>
         <Header 
@@ -19,11 +19,13 @@ class FormLogin extends Component {
             value={this.props.email}
             label='E-mail'
             placeholder='email@email.com'
+            onChangeText={(texto) => this.props.modificaEmail(texto)}
           />
           <Input 
             value={this.props.senha}
             label='Senha'
             placeholder='Senha'
+            onChangeText={(texto) => this.props.modificaSenha(texto)}
             secureTextEntry
           />
           <Link onPress={() => Actions.formCadastro()}>
@@ -47,4 +49,4 @@ const mapStateToProps = state => (
   }
 );
 
-export default connect(mapStateToProps, null)(FormLogin);
+export default connect(mapStateToProps, { modificaEmail, modificaSenha })(FormLogin);
