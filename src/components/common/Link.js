@@ -1,15 +1,15 @@
 import React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { Text, TouchableHighlight } from 'react-native';
 
-const Button = ({ onPress, children }) => {
+const Link = ({ onPress, children }) => {
   const { buttonStyle, textStyle } = styles;
   return (
-    <TouchableOpacity 
+    <TouchableHighlight 
       style={buttonStyle}
       onPress={onPress}
     >
       <Text style={textStyle}>{children}</Text>
-    </TouchableOpacity>
+    </TouchableHighlight>
   );
 };
 
@@ -18,16 +18,16 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'stretch',
-    backgroundColor: '#115E54',
+    backgroundColor: '#FFF',
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: '#115E54',
+    borderColor: '#FFF',
     marginLeft: 5,
     marginRight: 5,
   },
   textStyle: {
     alignSelf: 'center',
-    color: '#FFF',
+    color: '#007AFF',
     fontSize: 20,
     fontWeight: '600',
     paddingTop: 10,
@@ -35,4 +35,4 @@ const styles = {
   }
 };
 
-export { Button };
+export { Link };
