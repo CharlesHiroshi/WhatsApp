@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Card, CardSection, Input, Button } from './common';
+import { 
+  modificaEmail, 
+  modificaSenha, 
+  modificaNome 
+} from '../actions/AutenticacaoActions';
 
 class FormCadastro extends Component {
   render() {
@@ -13,16 +18,19 @@ class FormCadastro extends Component {
             value={this.props.nome}
             label='Nome'
             placeholder='Nome'
+            onChangeText={(texto) => this.props.modificaNome(texto)}
           />
           <Input 
             value={this.props.email}
             label='E-mail'
             placeholder='email@email.com'
+            onChangeText={(texto) => this.props.modificaEmail(texto)}
           />
           <Input 
             value={this.props.senha}
             label='Senha'
             placeholder='Senha'
+            onChangeText={(texto) => this.props.modificaSenha(texto)}
             secureTextEntry
           />
         </CardSection>
@@ -44,5 +52,8 @@ const mapStateToProps = state => (
   }
 );
 
-export default connect(mapStateToProps, null)(FormCadastro);
-
+export default connect(mapStateToProps, { 
+  modificaEmail, 
+  modificaSenha, 
+  modificaNome })(FormCadastro)
+;
