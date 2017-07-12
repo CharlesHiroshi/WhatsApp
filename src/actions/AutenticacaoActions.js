@@ -1,9 +1,10 @@
 import firebase from 'firebase';
+import { Actions } from 'react-native-router-flux';
 import { 
   MODIFICA_EMAIL,
   MODIFICA_SENHA,
   MODIFICA_NOME,
-  CADASTRA_USUARIO,
+  CADASTRA_USUARIO_SUCESSO,
   CADASTRA_USUARIO_ERRO
 } from './types';
 
@@ -25,24 +26,16 @@ export const modificaNome = (texto) => ({
 export const cadastraUsuario = ({ nome, email, senha }) => {
   return dispatch => {
     firebase.auth().createUserWithEmailAndPassword(email, senha)
-    .then(user => cadastroUsuarioSucesso(user, dispatch))
+    .then(user => cadastroUsuarioSucesso(dispatch))
     .catch(erro => cadastroUsuarioErro(erro, dispatch));
   };
 };
 
 const cadastroUsuarioSucesso = (dispatch) => {
-  dispatch(
-    {
-      type: 'sucesso'
-    }
-  );
+  dispatch({ type: CADASTRA_USUARIO_SUCESSO });
+  Actions.boasVindas();
 };
 
 const cadastroUsuarioErro = (erro, dispatch) => {
-  dispatch(
-    {
-      type: CADASTRA_USUARIO_ERRO, 
-      payload: erro.message
-    }
-  );
+  dispatch({ type: CADASTRA_USUARIO_ERRO, payload: erro.message });
 };

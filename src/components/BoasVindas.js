@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { ImageBackground, Image } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import { Card, CardSection, Header, Button } from './common';
 
 const bg = require('../imgs/bg.png');
@@ -22,7 +23,7 @@ class BoasVindas extends Component {
           <CardSection
           style={{ flexDirection: 'column', flex: 2, alignItems: 'center' }}
           >
-            <Button onPress={() => false}>
+            <Button onPress={() => Actions.formLogin()}>
               Fazer Login
             </Button>
           </CardSection>
@@ -33,4 +34,3 @@ class BoasVindas extends Component {
 }
 
 export default BoasVindas;
-// parei na aula 224...
