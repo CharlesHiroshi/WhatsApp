@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
 import { Card, CardSection, Input, Header, Button, Link } from './common';
 
 class FormLogin extends Component {
   render() {
+    console.log(this.props);
     return (
       <Card>
         <Header 
@@ -36,4 +38,11 @@ class FormLogin extends Component {
   }
 }
 
-export default FormLogin;
+const mapStateToProps = state => (
+  {
+    email: state.AutenticacaoReducer.email,
+    senha: state.AutenticacaoReducer.senha
+  }
+);
+
+export default connect(mapStateToProps, null)(FormLogin);
