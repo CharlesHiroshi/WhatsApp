@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import FormLogin from './components/FormLogin';
-import FormCadastro from './components/FormCadastro';
+import Routes from './Routes';
 
 class App extends Component {
   render() {
     return (
-      <FormLogin />
+      <Routes />
     );
   }
 }

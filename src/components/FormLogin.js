@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Actions } from 'react-native-router-flux';
 import { Card, CardSection, Input, Header, Button, Link } from './common';
 
 class FormLogin extends Component {
@@ -21,7 +22,7 @@ class FormLogin extends Component {
             placeholder='Senha'
             secureTextEntry
           />
-          <Link onPress={() => false}>
+          <Link onPress={() => Actions.formCadastro()}>
             Ainda não tem cadastro? Cadastre-se.
           </Link>
         </CardSection>
