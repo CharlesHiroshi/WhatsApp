@@ -17,8 +17,10 @@ const styles = {
   viewStyles: {
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'transparent' 
   },
   textStyles: {
+    color: '#FFF',
     fontSize: 25,
   }
 };

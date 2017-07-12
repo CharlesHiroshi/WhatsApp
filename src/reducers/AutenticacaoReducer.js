@@ -5,9 +5,9 @@ import {
 } from '../actions/types';
 
 const INITIAL_STATE = {
-  nome: 'Charles Hiroshi',
-  email: 'charles@teste.com',
-  senha: '123123'
+  nome: '',
+  email: '',
+  senha: ''
 };
 
 export default (state = INITIAL_STATE, action) => {

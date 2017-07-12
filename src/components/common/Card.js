@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 
 const Card = (props) => (
     <View style={styles.conteinerStyle}>
@@ -7,13 +7,11 @@ const Card = (props) => (
     </View>
 );
 
-const styles = {
+const styles = StyleSheet.create({
   conteinerStyle: {
     flex: 1,
-    elevation: 1,
-    padding: 10,
-    backgroundColor: '#FFF'
-  }
-};
+    backgroundColor: 'transparent'
+  },
+});
 
 export { Card };
