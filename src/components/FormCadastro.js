@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ImageBackground } from 'react-native';
+import { ImageBackground, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { Card, CardSection, Input, Button } from './common';
 import { 
@@ -43,6 +43,7 @@ class FormCadastro extends Component {
               onChangeText={(texto) => this.props.modificaSenha(texto)}
               secureTextEntry
             />
+            <Text style={{ color: '#FF0000', fontSize: 18 }} >{this.props.erroCadastro}</Text>
           </CardSection>
           <CardSection style={{ flexDirection: 'column', flex: 2 }}>
             <Button onPress={() => this._cadastraUsuario()}>
@@ -59,7 +60,8 @@ const mapStateToProps = state => (
   {
     nome: state.AutenticacaoReducer.nome,
     email: state.AutenticacaoReducer.email,
-    senha: state.AutenticacaoReducer.senha
+    senha: state.AutenticacaoReducer.senha,
+    erroCadastro: state.AutenticacaoReducer.erroCadastro
   }
 );
 

@@ -3,7 +3,8 @@ import {
   MODIFICA_EMAIL,
   MODIFICA_SENHA,
   MODIFICA_NOME,
-  CADASTRA_USUARIO
+  CADASTRA_USUARIO,
+  CADASTRA_USUARIO_ERRO
 } from './types';
 
 export const modificaEmail = (texto) => ({
@@ -24,7 +25,7 @@ export const modificaNome = (texto) => ({
 export const cadastraUsuario = ({ nome, email, senha }) => {
   return dispatch => {
     firebase.auth().createUserWithEmailAndPassword(email, senha)
-    .then(user => cadastroUsuarioSucesso(user.uid, dispatch))
+    .then(user => cadastroUsuarioSucesso(user, dispatch))
     .catch(erro => cadastroUsuarioErro(erro, dispatch));
   };
 };
@@ -40,7 +41,8 @@ const cadastroUsuarioSucesso = (dispatch) => {
 const cadastroUsuarioErro = (erro, dispatch) => {
   dispatch(
     {
-      type: 'erro'
+      type: CADASTRA_USUARIO_ERRO, 
+      payload: erro.message
     }
   );
 };
