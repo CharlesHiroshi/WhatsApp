@@ -65,7 +65,8 @@ const estilos = StyleSheet.create({
   },
   imageViewStyle: {
     width: 50, 
-    justifyContent: 'center'
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   sairViewStyle: {
     justifyContent: 'center'
