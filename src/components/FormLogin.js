@@ -2,7 +2,15 @@ import React, { Component } from 'react';
 import { ImageBackground, Text } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { Card, CardSection, Input, Header, Button, Link } from './common';
+import { 
+  Card, 
+  CardSection, 
+  Input, 
+  Header, 
+  Button, 
+  Link, 
+  Spinner 
+} from './common';
 import { 
   modificaEmail, 
   modificaSenha, 
@@ -15,6 +23,17 @@ class FormLogin extends Component {
   _autenticarUsuario() {
     const { email, senha } = this.props;
     this.props.autenticarUsuario({ email, senha });
+  }
+
+  renderBtnAcessar() {
+    if (this.props.loading_login) {
+      return <Spinner size='large' />;
+    }
+    return (
+      <Button onPress={() => this._autenticarUsuario()}>
+        Acessar
+      </Button>
+    );
   }
 
   render() {
@@ -49,9 +68,7 @@ class FormLogin extends Component {
             </Text>
           </CardSection>
           <CardSection style={{ flexDirection: 'column', flex: 2 }}>
-            <Button onPress={() => this._autenticarUsuario()}>
-              Acessar
-            </Button>
+            {this.renderBtnAcessar()}
           </CardSection>
         </Card>
       </ImageBackground>
@@ -63,7 +80,8 @@ const mapStateToProps = state => (
   {
     email: state.AutenticacaoReducer.email,
     senha: state.AutenticacaoReducer.senha,
-    erroLogin: state.AutenticacaoReducer.erroLogin
+    erroLogin: state.AutenticacaoReducer.erroLogin,
+    loading_login: state.AutenticacaoReducer.loading_login
   }
 );
 

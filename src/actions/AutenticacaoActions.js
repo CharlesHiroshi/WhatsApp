@@ -7,7 +7,8 @@ import {
   CADASTRA_USUARIO_SUCESSO,
   CADASTRA_USUARIO_ERRO,
   LOGIN_USUARIO_SUCESSO,
-  LOGIN_USUARIO_ERRO
+  LOGIN_USUARIO_ERRO,
+  LOGIN_EM_ANDAMENTO
 } from './types';
 
 export const modificaEmail = (texto) => ({
@@ -46,6 +47,7 @@ const cadastroUsuarioErro = (dispatch, erro) => {
 };
 
 export const autenticarUsuario = ({ email, senha }) => dispatch => {
+  dispatch({ type: LOGIN_EM_ANDAMENTO });
   firebase.auth().signInWithEmailAndPassword(email, senha)
   .then(value => loginUsuarioSucesso(dispatch, value))
   .catch(erro => loginUsuarioErro(dispatch, erro));
