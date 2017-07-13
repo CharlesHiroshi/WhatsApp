@@ -1,22 +1,44 @@
 import React, { Component } from 'react';
-import { ImageBackground } from 'react-native';
+import { ImageBackground, StyleSheet, View } from 'react-native';
+import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
 import { Card, Header } from './common';
 
-const bg = require('../imgs/bg.png');
+const FirstRoute = () => <View style={[styles.container, { backgroundColor: '#ff4081' }]} />;
+const SecondRoute = () => <View style={[styles.container, { backgroundColor: '#673ab7' }]} />;
 
-class Principal extends Component {
+export default class Principal extends Component {
+  state = {
+    index: 0,
+    routes: [
+      { key: '1', title: 'First' },
+      { key: '2', title: 'Second' },
+    ],
+  };
+
+  _handleChangeTab = index => this.setState({ index });
+
+  _renderHeader = props => <TabBar {...props} />;
+
+  _renderScene = SceneMap({
+    1: FirstRoute,
+    2: SecondRoute,
+  });
+
   render() {
     return (
-      <ImageBackground style={{ flex: 1 }} source={bg}>
-        <Card>
-          <Header 
-            style={{ flex: 1 }}
-            headerText='Página Principal'
-          />
-        </Card>
-      </ImageBackground>
+      <TabViewAnimated
+        style={styles.container}
+        navigationState={this.state}
+        renderScene={this._renderScene}
+        renderHeader={this._renderHeader}
+        onRequestChangeTab={this._handleChangeTab}
+      />
     );
   }
 }
 
-export default Principal;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
