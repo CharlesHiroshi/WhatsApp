@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ImageBackground, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { Card, CardSection, Input, Button } from './common';
+import { Card, CardSection, Input, Button, Spinner } from './common';
 import { 
   modificaEmail, 
   modificaSenha, 
@@ -15,6 +15,17 @@ class FormCadastro extends Component {
   _cadastraUsuario() {
     const { nome, email, senha } = this.props;
     this.props.cadastraUsuario({ nome, email, senha });
+  }
+
+  renderBtnCadastrar() {
+    if (this.props.loading) {
+      return <Spinner size='large' />;
+    }
+    return (
+      <Button onPress={() => this._cadastraUsuario()}>
+        Cadastrar
+      </Button>
+    );
   }
 
   render() {
@@ -48,9 +59,7 @@ class FormCadastro extends Component {
             </Text>
           </CardSection>
           <CardSection style={{ flexDirection: 'column', flex: 2 }}>
-            <Button onPress={() => this._cadastraUsuario()}>
-              Cadastrar
-            </Button>
+            {this.renderBtnCadastrar()}
           </CardSection>
         </Card>
       </ImageBackground>
@@ -63,7 +72,8 @@ const mapStateToProps = state => (
     nome: state.AutenticacaoReducer.nome,
     email: state.AutenticacaoReducer.email,
     senha: state.AutenticacaoReducer.senha,
-    erroCadastro: state.AutenticacaoReducer.erroCadastro
+    erroCadastro: state.AutenticacaoReducer.erroCadastro,
+    loading: state.AutenticacaoReducer.loading
   }
 );
 

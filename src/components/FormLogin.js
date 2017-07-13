@@ -26,7 +26,7 @@ class FormLogin extends Component {
   }
 
   renderBtnAcessar() {
-    if (this.props.loading_login) {
+    if (this.props.loading) {
       return <Spinner size='large' />;
     }
     return (
@@ -81,7 +81,7 @@ const mapStateToProps = state => (
     email: state.AutenticacaoReducer.email,
     senha: state.AutenticacaoReducer.senha,
     erroLogin: state.AutenticacaoReducer.erroLogin,
-    loading_login: state.AutenticacaoReducer.loading_login
+    loading: state.AutenticacaoReducer.loading
   }
 );
 
