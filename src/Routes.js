@@ -8,12 +8,35 @@ import Principal from './components/Principal';
 class Routes extends Component {
   render() {
     return (
-      <Router>
+      <Router 
+        navigationBarStyle={{ backgroundColor: '#115E54' }} 
+        titleStyle={{ color: '#FFF' }}
+      >
         <Scene key='root'>
-          <Scene key='formLogin' component={FormLogin} title='Login' />
-          <Scene key='formCadastro' component={FormCadastro} title='Cadastro' />
-          <Scene key='boasVindas' component={BoasVindas} title='Boas Vindas' />
-          <Scene key='principal' component={Principal} title='Principal' />
+          <Scene 
+            key='formLogin' 
+            component={FormLogin} 
+            title='Login' 
+            hideNavBar 
+          />
+          <Scene 
+            key='formCadastro' 
+            component={FormCadastro} 
+            title='Cadastro' 
+            hideNavBar={false} 
+          />
+          <Scene 
+            key='boasVindas' 
+            component={BoasVindas} 
+            title='Boas Vindas' 
+            hideNavBar 
+          />
+          <Scene 
+            key='principal' 
+            component={Principal} 
+            title='Principal' 
+            hideNavBar 
+          />
         </Scene>
       </Router>
     );
