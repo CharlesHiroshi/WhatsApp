@@ -36,6 +36,7 @@ class Routes extends Component {
             component={Principal} 
             title='Principal' 
             hideNavBar 
+            initial
           />
         </Scene>
       </Router>
