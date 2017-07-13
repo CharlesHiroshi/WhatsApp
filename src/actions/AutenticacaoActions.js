@@ -5,7 +5,9 @@ import {
   MODIFICA_SENHA,
   MODIFICA_NOME,
   CADASTRA_USUARIO_SUCESSO,
-  CADASTRA_USUARIO_ERRO
+  CADASTRA_USUARIO_ERRO,
+  LOGIN_USUARIO_SUCESSO,
+  LOGIN_USUARIO_ERRO
 } from './types';
 
 export const modificaEmail = (texto) => ({
@@ -39,17 +41,20 @@ const cadastroUsuarioSucesso = (dispatch) => {
   Actions.boasVindas();
 };
 
-const cadastroUsuarioErro = (erro, dispatch) => {
+const cadastroUsuarioErro = (dispatch, erro) => {
   dispatch({ type: CADASTRA_USUARIO_ERRO, payload: erro.message });
 };
 
-export const autenticarUsuario = ({ email, senha }) => {
-  console.log(email);
-  console.log(senha);
+export const autenticarUsuario = ({ email, senha }) => dispatch => {
   firebase.auth().signInWithEmailAndPassword(email, senha)
-  .then(value => console.log(value))
-  .catch(erro => console.log(erro));
-  return {
-  type: 'autenticar usuario'
-  };
+  .then(value => loginUsuarioSucesso(dispatch, value))
+  .catch(erro => loginUsuarioErro(dispatch, erro));
+};
+
+const loginUsuarioSucesso = (dispatch) => {
+  dispatch({ type: LOGIN_USUARIO_SUCESSO });
+};
+
+const loginUsuarioErro = (dispatch, erro) => {
+  dispatch({ type: LOGIN_USUARIO_ERRO, payload: erro.message });
 };
