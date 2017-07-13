@@ -23,17 +23,15 @@ export const modificaNome = (texto) => ({
   payload: texto
 });
 
-export const cadastraUsuario = ({ nome, email, senha }) => {
-  return dispatch => {
-    firebase.auth().createUserWithEmailAndPassword(email, senha)
-    .then(user => { 
-      const idCadastro = user.uid;
-      firebase.database().ref(`/contatos/${idCadastro}`)
-      .push({ nome })
-      .then(value => cadastroUsuarioSucesso(dispatch, value));
-    })
-    .catch(erro => cadastroUsuarioErro(dispatch, erro));
-  };
+export const cadastraUsuario = ({ nome, email, senha }) => dispatch => {
+  firebase.auth().createUserWithEmailAndPassword(email, senha)
+  .then(user => { 
+    const idCadastro = user.uid;
+    firebase.database().ref(`/contatos/${idCadastro}`)
+    .push({ nome })
+    .then(value => cadastroUsuarioSucesso(dispatch, value));
+  })
+  .catch(erro => cadastroUsuarioErro(dispatch, erro));
 };
 
 const cadastroUsuarioSucesso = (dispatch) => {
@@ -48,7 +46,10 @@ const cadastroUsuarioErro = (erro, dispatch) => {
 export const autenticarUsuario = ({ email, senha }) => {
   console.log(email);
   console.log(senha);
+  firebase.auth().signInWithEmailAndPassword(email, senha)
+  .then(value => console.log(value))
+  .catch(erro => console.log(erro));
   return {
-    type: 'autenticar usuario'
+  type: 'autenticar usuario'
   };
 };
