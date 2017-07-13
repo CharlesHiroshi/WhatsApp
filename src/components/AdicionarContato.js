@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { ImageBackground } from 'react-native';
+import { connect } from 'react-redux';
 import { Card, CardSection, Input, Button } from './common';
 
 const bg = require('../imgs/bg.png');
@@ -13,6 +14,7 @@ class AdicionarContato extends Component {
             style={{ flexDirection: 'column', flex: 3 }}
           >
             <Input 
+              value={this.props.adiciona_contato_email}
               label='E-mail : '
               placeholder='email@email.com'
               onChangeText={() => false}
@@ -31,4 +33,10 @@ class AdicionarContato extends Component {
   }
 }
 
-export default AdicionarContato;
+const mapStateToProps = state => (
+  {
+    adiciona_contato_email: state.AppReducer.adiciona_contato_email
+  }
+);
+
+export default connect(mapStateToProps, null)(AdicionarContato);
