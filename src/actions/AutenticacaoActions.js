@@ -26,8 +26,13 @@ export const modificaNome = (texto) => ({
 export const cadastraUsuario = ({ nome, email, senha }) => {
   return dispatch => {
     firebase.auth().createUserWithEmailAndPassword(email, senha)
-    .then(user => cadastroUsuarioSucesso(dispatch))
-    .catch(erro => cadastroUsuarioErro(erro, dispatch));
+    .then(user => { 
+      const idCadastro = user.uid;
+      firebase.database().ref(`/contatos/${idCadastro}`)
+      .push({ nome })
+      .then(value => cadastroUsuarioSucesso(dispatch, value));
+    })
+    .catch(erro => cadastroUsuarioErro(dispatch, erro));
   };
 };
 
