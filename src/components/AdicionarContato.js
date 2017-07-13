@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ImageBackground } from 'react-native';
 import { connect } from 'react-redux';
 import { Card, CardSection, Input, Button } from './common';
+import { modificaAdicionaContatoEmail } from '../actions/AppActions';
 
 const bg = require('../imgs/bg.png');
 
@@ -17,7 +18,8 @@ class AdicionarContato extends Component {
               value={this.props.adiciona_contato_email}
               label='E-mail : '
               placeholder='email@email.com'
-              onChangeText={() => false}
+              onChangeText={
+                (texto) => this.props.modificaAdicionaContatoEmail(texto)}
             />
           </CardSection>
           <CardSection style={{ flexDirection: 'column', flex: 2 }}>
@@ -39,4 +41,6 @@ const mapStateToProps = state => (
   }
 );
 
-export default connect(mapStateToProps, null)(AdicionarContato);
+export default connect(mapStateToProps, { 
+  modificaAdicionaContatoEmail 
+})(AdicionarContato);
