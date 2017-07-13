@@ -43,7 +43,9 @@ class FormCadastro extends Component {
               onChangeText={(texto) => this.props.modificaSenha(texto)}
               secureTextEntry
             />
-            <Text style={{ color: '#FF0000', fontSize: 18 }} >{this.props.erroCadastro}</Text>
+            <Text style={{ color: '#FF0000', fontSize: 18 }} >
+              {this.props.erroCadastro}
+            </Text>
           </CardSection>
           <CardSection style={{ flexDirection: 'column', flex: 2 }}>
             <Button onPress={() => this._cadastraUsuario()}>
