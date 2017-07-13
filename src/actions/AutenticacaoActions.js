@@ -44,3 +44,11 @@ const cadastroUsuarioSucesso = (dispatch) => {
 const cadastroUsuarioErro = (erro, dispatch) => {
   dispatch({ type: CADASTRA_USUARIO_ERRO, payload: erro.message });
 };
+
+export const autenticarUsuario = ({ email, senha }) => {
+  console.log(email);
+  console.log(senha);
+  return {
+    type: 'autenticar usuario'
+  };
+};

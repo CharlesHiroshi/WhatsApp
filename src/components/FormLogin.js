@@ -3,11 +3,20 @@ import { ImageBackground } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { Card, CardSection, Input, Header, Button, Link } from './common';
-import { modificaEmail, modificaSenha } from '../actions/AutenticacaoActions';
+import { 
+  modificaEmail, 
+  modificaSenha, 
+  autenticarUsuario 
+} from '../actions/AutenticacaoActions';
 
 const bg = require('../imgs/bg.png');
 
 class FormLogin extends Component {
+  _autenticarUsuario() {
+    const { email, senha } = this.props;
+    this.props.autenticarUsuario({ email, senha });
+  }
+
   render() {
     return (
       <ImageBackground style={{ flex: 1 }} source={bg}>
@@ -37,7 +46,7 @@ class FormLogin extends Component {
             </Link>
           </CardSection>
           <CardSection style={{ flexDirection: 'column', flex: 2 }}>
-            <Button onPress={() => false}>
+            <Button onPress={() => this._autenticarUsuario()}>
               Acessar
             </Button>
           </CardSection>
@@ -56,5 +65,6 @@ const mapStateToProps = state => (
 
 export default connect(mapStateToProps, { 
   modificaEmail, 
-  modificaSenha })(FormLogin)
-;
+  modificaSenha,
+  autenticarUsuario 
+})(FormLogin);
