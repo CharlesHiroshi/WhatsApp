@@ -4,6 +4,7 @@ import FormLogin from './components/FormLogin';
 import FormCadastro from './components/FormCadastro';
 import BoasVindas from './components/BoasVindas';
 import Principal from './components/Principal';
+import AdicionarContato from './components/AdicionarContato';
 
 class Routes extends Component {
   render() {
@@ -37,6 +38,12 @@ class Routes extends Component {
             title='Principal' 
             hideNavBar 
             initial
+          />
+          <Scene 
+            key='adicionarContato' 
+            component={AdicionarContato} 
+            title='Adicionar Contato' 
+            hideNavBar={false}
           />
         </Scene>
       </Router>

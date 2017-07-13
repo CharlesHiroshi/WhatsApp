@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { ImageBackground, StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { TabViewAnimated, SceneMap } from 'react-native-tab-view';
-import { Card } from './common';
 import TabBarMenu from './TabBarMenu';
 import Conversas from './Conversas';
 import Contatos from './Contatos';

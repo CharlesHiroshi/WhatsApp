@@ -7,6 +7,7 @@ const Link = ({ onPress, children }) => {
     <TouchableHighlight 
       style={buttonStyle}
       onPress={onPress}
+      underlayColor={'transparent'}
     >
       <Text style={textStyle}>{children}</Text>
     </TouchableHighlight>
