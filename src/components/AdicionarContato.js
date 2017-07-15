@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { ImageBackground } from 'react-native';
 import { connect } from 'react-redux';
 import { Card, CardSection, Input, Button } from './common';
-import { modificaAdicionaContatoEmail } from '../actions/AppActions';
+import { 
+  modificaAdicionaContatoEmail, 
+  adicionaContato 
+} from '../actions/AppActions';
 
 const bg = require('../imgs/bg.png');
 
@@ -11,9 +14,7 @@ class AdicionarContato extends Component {
     return (
       <ImageBackground style={{ flex: 1 }} source={bg}>
         <Card>
-          <CardSection 
-            style={{ flexDirection: 'column', flex: 3 }}
-          >
+          <CardSection style={{ flexDirection: 'column', flex: 3 }}>
             <Input 
               value={this.props.adiciona_contato_email}
               label='E-mail : '
@@ -24,7 +25,7 @@ class AdicionarContato extends Component {
           </CardSection>
           <CardSection style={{ flexDirection: 'column', flex: 2 }}>
             <Button 
-              onPress={() => false}
+            onPress={() => this.props.adicionaContato(this.props.adiciona_contato_email)}
             >
               Adicionar Contato
             </Button>
@@ -42,5 +43,6 @@ const mapStateToProps = state => (
 );
 
 export default connect(mapStateToProps, { 
-  modificaAdicionaContatoEmail 
+  modificaAdicionaContatoEmail,
+  adicionaContato
 })(AdicionarContato);
