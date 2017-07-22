@@ -1,3 +1,4 @@
+import firebase from 'firebase';
 import { MODIFICA_ADICIONA_CONTATO_EMAIL } from './types';
 
 export const modificaAdicionaContatoEmail = texto => {
