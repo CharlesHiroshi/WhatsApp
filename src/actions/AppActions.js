@@ -11,13 +11,18 @@ export const modificaAdicionaContatoEmail = texto => ({
 });
 
 export const adicionaContato = email => dispatch => {
-    const emailB64 = b64.encode(email);
-    firebase.database().ref(`/contatos/${emailB64}`)
+    const emailContatoB64 = b64.encode(email);
+    firebase.database().ref(`/contatos/${emailContatoB64}`)
       .once('value')
       .then(snapshot => {
         console.log(snapshot.val());
         if (snapshot.val()) {
-          console.log('Usuário existe');
+          const { currentUser } = firebase.auth();
+          const emailUsuarioB64 = b64.encode(currentUser.email);
+          firebase.database().ref(`/usuario_contatos/${emailUsuarioB64}`)
+            .push({ email, nome: 'Nome do Contato' })
+            .then(() => console.log('Sucesso'))
+            .catch(erro => console.log(erro));
         } else {
           dispatch(
             { type: ADICIONA_CONTATO_ERRO, 
@@ -29,4 +34,4 @@ export const adicionaContato = email => dispatch => {
   };
 
 // Aula 251 - 
-// Adicionando contatos do usuário parte 3 - Tratando usuários inexistentes
+// Adicionando contatos do usuário parte 4 - Firebase.auth()
