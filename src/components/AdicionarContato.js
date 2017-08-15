@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ImageBackground } from 'react-native';
+import { ImageBackground, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { Card, CardSection, Input, Button } from './common';
 import { 
@@ -22,6 +22,9 @@ class AdicionarContato extends Component {
               onChangeText={
                 (texto) => this.props.modificaAdicionaContatoEmail(texto)}
             />
+            <Text style={{ color: '#FF0000', fontSize: 18 }} >
+              {this.props.erro_adicionar_contato}
+            </Text>
           </CardSection>
           <CardSection style={{ flexDirection: 'column', flex: 2 }}>
             <Button 
@@ -38,7 +41,8 @@ class AdicionarContato extends Component {
 
 const mapStateToProps = state => (
   {
-    adiciona_contato_email: state.AppReducer.adiciona_contato_email
+    adiciona_contato_email: state.AppReducer.adiciona_contato_email,
+    erro_adicionar_contato: state.AppReducer.erro_adicionar_contato,
   }
 );
 
