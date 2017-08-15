@@ -33,5 +33,5 @@ export const adicionaContato = email => dispatch => {
     });
   };
 
-// Aula 252 - 
-// Adicionando contatos do usuário parte 4 - Firebase.auth()
+// Aula 254 - 
+// Instalando o Lodash
