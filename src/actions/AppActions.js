@@ -1,5 +1,6 @@
 import b64 from 'base-64';
 import firebase from 'firebase';
+import _ from 'lodash';
 import { 
   MODIFICA_ADICIONA_CONTATO_EMAIL, 
   ADICIONA_CONTATO_ERRO 
@@ -17,10 +18,12 @@ export const adicionaContato = email => dispatch => {
       .then(snapshot => {
         console.log(snapshot.val());
         if (snapshot.val()) {
+          const dadosContato = _.first(_.values(snapshot.val()));
+          console.log(dadosContato);
           const { currentUser } = firebase.auth();
           const emailUsuarioB64 = b64.encode(currentUser.email);
           firebase.database().ref(`/usuario_contatos/${emailUsuarioB64}`)
-            .push({ email, nome: 'Nome do Contato' })
+            .push({ email, nome: dadosContato.nome })
             .then(() => console.log('Sucesso'))
             .catch(erro => console.log(erro));
         } else {
@@ -33,5 +36,5 @@ export const adicionaContato = email => dispatch => {
     });
   };
 
-// Aula 254 - 
-// Instalando o Lodash
+// Aula 255 - 
+// Adicionando Contatos do Usuário - Parte 6 - Object to Array com Lodash
