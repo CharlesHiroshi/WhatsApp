@@ -25,7 +25,7 @@ export const adicionaContato = email => dispatch => {
           firebase.database().ref(`/usuario_contatos/${emailUsuarioB64}`)
             .push({ email, nome: dadosContato.nome })
             .then(() => console.log('Sucesso'))
-            .catch(erro => console.log(erro));
+            .catch(erro => adicionaContatoErro(erro.message, dispatch));
         } else {
           dispatch(
             { type: ADICIONA_CONTATO_ERRO, 
@@ -33,8 +33,17 @@ export const adicionaContato = email => dispatch => {
             }
           );
         }
-    });
-  };
+  });
+};
 
-// Aula 255 - 
-// Adicionando Contatos do Usuário - Parte 6 - Object to Array com Lodash
+const adicionaContatoErro = (erro, dispatch) => (
+  dispatch(
+    {
+      type: ADICIONA_CONTATO_ERRO,
+      payload: erro
+    }
+  )
+);
+
+// Aula 256 - 
+// Adicionando Contatos do Usuário - Parte 7 - Tratando Fluxo de Erro
