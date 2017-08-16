@@ -10,9 +10,9 @@ import {
 const bg = require('../imgs/bg.png');
 
 class AdicionarContato extends Component {
-  render() {
-    return (
-      <ImageBackground style={{ flex: 1 }} source={bg}>
+  renderAdicionaContato() {
+    if (!this.props.adiciona_contato_sucesso) {
+      return (
         <Card>
           <CardSection style={{ flexDirection: 'column', flex: 3 }}>
             <Input 
@@ -34,6 +34,23 @@ class AdicionarContato extends Component {
             </Button>
           </CardSection>
         </Card>
+      );
+    } 
+    return (
+    <Card>
+      <CardSection style={{ flex: 1, alignItems: 'center' }}>
+        <Text style={{ color: '#FFF', fontSize: 18 }} >
+          Cadastro realizado com Sucesso!
+        </Text>
+      </CardSection>
+    </Card>
+    );
+  }
+
+  render() {
+    return (
+      <ImageBackground style={{ flex: 1 }} source={bg}>
+        { this.renderAdicionaContato() }
       </ImageBackground>
     );
   }
@@ -43,6 +60,7 @@ const mapStateToProps = state => (
   {
     adiciona_contato_email: state.AppReducer.adiciona_contato_email,
     erro_adicionar_contato: state.AppReducer.erro_adicionar_contato,
+    adiciona_contato_sucesso: state.AppReducer.adiciona_contato_sucesso
   }
 );
 
@@ -50,3 +68,7 @@ export default connect(mapStateToProps, {
   modificaAdicionaContatoEmail,
   adicionaContato
 })(AdicionarContato);
+
+
+// Aula 257 - 
+// Adicionando Contatos do Usuário - Parte 8 - Tratando Fluxo de Sucesso
