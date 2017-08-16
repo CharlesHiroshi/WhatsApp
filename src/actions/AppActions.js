@@ -7,11 +7,6 @@ import {
   ADICIONA_CONTATO_SUCESSO 
 } from './types';
 
-export const modificaAdicionaContatoEmail = texto => ({
-    type: MODIFICA_ADICIONA_CONTATO_EMAIL,
-    payload: texto
-});
-
 export const adicionaContato = email => dispatch => {
     const emailContatoB64 = b64.encode(email);
     firebase.database().ref(`/contatos/${emailContatoB64}`)
@@ -38,18 +33,25 @@ export const adicionaContato = email => dispatch => {
 };
 
 const adicionaContatoErro = (erro, dispatch) => (
-  dispatch(
-    {
-      type: ADICIONA_CONTATO_ERRO,
-      payload: erro
-    }
-  )
+  dispatch({
+    type: ADICIONA_CONTATO_ERRO,
+    payload: erro
+  })
 );
 
 const adicionaContatoSucesso = dispatch => (
-  dispatch(
-    {
-      type: ADICIONA_CONTATO_SUCESSO
-    }
-  )
+  dispatch({
+    type: ADICIONA_CONTATO_SUCESSO,
+    payload: true
+  })
 );
+
+export const habilitaInclusaoContato = () => ({
+    type: ADICIONA_CONTATO_SUCESSO,
+    payload: false
+});
+
+export const modificaAdicionaContatoEmail = texto => ({
+  type: MODIFICA_ADICIONA_CONTATO_EMAIL,
+  payload: texto
+});

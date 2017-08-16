@@ -69,6 +69,5 @@ export default connect(mapStateToProps, {
   adicionaContato
 })(AdicionarContato);
 
-
-// Aula 257 - 
-// Adicionando Contatos do Usuário - Parte 8 - Tratando Fluxo de Sucesso
+// Aula 258 - 
+// Adicionando Contatos do Usuário - Parte 9 - Reexibindo os componentes de inclusão

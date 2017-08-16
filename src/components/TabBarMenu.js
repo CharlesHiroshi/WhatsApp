@@ -7,12 +7,16 @@ import {
   StyleSheet, 
   TouchableHighlight 
 } from 'react-native';
+import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { TabBar } from 'react-native-tab-view';
+import { 
+  habilitaInclusaoContato
+} from '../actions/AppActions';
 
 const contato = require('../imgs/adicionar_contato.png');
 
-export default props => (
+const TabBarMenu = props => (
   <View style={estilos.containerStyle}>
     <StatusBar />
       <View style={estilos.contentStyle}>
@@ -24,7 +28,10 @@ export default props => (
         <View style={estilos.optionsViewStyle}>
           <View style={estilos.imageViewStyle}>
             <TouchableHighlight
-              onPress={() => Actions.adicionarContato()}
+              onPress={() => { 
+                Actions.adicionarContato(); 
+                props.habilitaInclusaoContato();
+              }}
               underlayColor={'transparent'}
             >
               <Image source={contato} />
@@ -38,6 +45,8 @@ export default props => (
     <TabBar {...props} style={estilos.tabBarMenuStyle} />
   </View>
 );
+
+export default connect(null, { habilitaInclusaoContato })(TabBarMenu);
 
 const estilos = StyleSheet.create({
   containerStyle: {
