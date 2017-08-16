@@ -65,6 +65,3 @@ export const contatosUsuarioFetch = () => {
     });
   };
 };
-
-// Aula 263
-// Listando contatos - parte 5 - Criando o ListaContatosReducer
