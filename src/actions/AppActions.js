@@ -61,10 +61,11 @@ export const contatosUsuarioFetch = () => {
     const emailUsuarioB64 = b64.encode(currentUser.email);
     firebase.database().ref(`/usuario_contatos/${emailUsuarioB64}`)
       .on('value', snapshot => {
+        console.log(snapshot.val());
         dispatch({ type: LISTA_CONTATOS_USUARIO, payload: snapshot.val() });
     });
   };
 };
 
-// Aula 261
-// Listando contatos - parte 3 - Action Creator contatos Usuario Fecth
+// Aula 262
+// Listando contatos - parte 4 - Ajustando o Componente Contatos
