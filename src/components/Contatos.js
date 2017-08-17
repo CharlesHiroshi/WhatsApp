@@ -8,24 +8,20 @@ import { contatosUsuarioFetch } from '../actions/AppActions';
 const bg = require('../imgs/bg.png');
 
 class Contatos extends Component {
-  constructor(props) {
-    super(props);
-    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-    this.state = { fonteDeDados: ds.cloneWithRows([
-      'Registro 1',
-      'Registro 2',
-      'Registro 3',
-      'Registro 4',
-    ]) };
-  }
-
   componentWillMount() {
     this.props.contatosUsuarioFetch();
-    console.log('Recuperado via Props: ', this.props.contatos);
+    this.criaFonteDeDados(this.props.contatos);
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('Recuperado via Props após update: ', nextProps.contatos);
+    this.criaFonteDeDados(nextProps.contatos);
+  }
+
+  criaFonteDeDados(contatos) {
+    const ds = new ListView.DataSource({ 
+      rowHasChanged: (r1, r2) => r1 !== r2 
+    });
+    this.fonteDeDados = ds.cloneWithRows(contatos);
   }
 
   render() {
@@ -33,8 +29,14 @@ class Contatos extends Component {
       <ImageBackground style={{ flex: 1 }} source={bg}>
         <Card>
           <ListView
-            dataSource={this.state.fonteDeDados}
-            renderRow={data => <View><Text>{data}</Text></View>}
+            enableEmptySections
+            dataSource={this.fonteDeDados}
+            renderRow={data => (
+              <View>
+                <Text>{data.nome}</Text>
+                <Text>{data.email}</Text>
+              </View>
+            )}
           />
         </Card>
       </ImageBackground>
@@ -46,12 +48,10 @@ const mapStateToProps = state => {
   const contatos = _.map(
     state.ListaContatosReducer, 
     (val, uid) => ({ ...val, uid }));
-  console.log(contatos);
   return { contatos };
 };
 
 export default connect(mapStateToProps, { contatosUsuarioFetch })(Contatos);
 
-// Aula 266
-// Listando contatos - parte 8 - ComponentWillReceiveProps
-
+// Aula 267
+// Listando contatos - parte 9 - Atualizando o DataSource com base no Firebase
