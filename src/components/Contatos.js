@@ -21,6 +21,11 @@ class Contatos extends Component {
 
   componentWillMount() {
     this.props.contatosUsuarioFetch();
+    console.log('Recuperado via Props: ', this.props.contatos);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('Recuperado via Props após update: ', nextProps.contatos);
   }
 
   render() {
@@ -42,10 +47,11 @@ const mapStateToProps = state => {
     state.ListaContatosReducer, 
     (val, uid) => ({ ...val, uid }));
   console.log(contatos);
-  return {};
+  return { contatos };
 };
 
 export default connect(mapStateToProps, { contatosUsuarioFetch })(Contatos);
 
-// Aula 265
-// Listando contatos - parte 7 - Introdução ao ListView
+// Aula 266
+// Listando contatos - parte 8 - ComponentWillReceiveProps
+
