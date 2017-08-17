@@ -32,9 +32,15 @@ class Contatos extends Component {
             enableEmptySections
             dataSource={this.fonteDeDados}
             renderRow={data => (
-              <View>
-                <Text>{data.nome}</Text>
-                <Text>{data.email}</Text>
+              <View
+                style={{ 
+                flex: 1, 
+                padding: 20, 
+                borderBottomWidth: 1, 
+                borderColor: '#CCC' }} 
+              >
+                <Text style={{ fontSize: 25 }} >{data.nome}</Text>
+                <Text style={{ fontSize: 18 }} >{data.email}</Text>
               </View>
             )}
           />
@@ -53,5 +59,5 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, { contatosUsuarioFetch })(Contatos);
 
-// Aula 267
-// Listando contatos - parte 9 - Atualizando o DataSource com base no Firebase
+// Aula 268
+// Listando contatos - parte 10 - Melhorando o Visual
