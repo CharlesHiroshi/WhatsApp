@@ -10,6 +10,3 @@ export default (state = INITIAL_STATE, action) => {
       return state;
   }
 };
-
-// Aula 264
-// Listando contatos - parte 6 - MapStateToProps um pouco mais a fundo
