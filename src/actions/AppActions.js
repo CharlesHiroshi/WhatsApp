@@ -5,7 +5,8 @@ import {
   MODIFICA_ADICIONA_CONTATO_EMAIL, 
   ADICIONA_CONTATO_ERRO,
   ADICIONA_CONTATO_SUCESSO,
-  LISTA_CONTATOS_USUARIO
+  LISTA_CONTATOS_USUARIO,
+  MODIFICA_MENSAGEM
 } from './types';
 
 export const adicionaContato = email => dispatch => {
@@ -65,3 +66,8 @@ export const contatosUsuarioFetch = () => {
     });
   };
 };
+
+export const modificaMensagem = texto => ({
+  type: MODIFICA_MENSAGEM,
+  payload: texto
+});
