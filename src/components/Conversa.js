@@ -7,10 +7,10 @@ import {
   ImageBackground, 
   TouchableHighlight 
 } from 'react-native';
-import { modificaMensagem } from '../actions/AppActions';
+import { modificaMensagem, enviarMensagem } from '../actions/AppActions';
 
 const bg = require('../imgs/bg.png');
-const enviarMensagem = require('../imgs/enviar_mensagem.png');
+const btnEnviarMensagem = require('../imgs/enviar_mensagem.png');
 
 class Conversa extends Component {
   render() {
@@ -25,10 +25,10 @@ class Conversa extends Component {
               style={{ flex: 4, fontSize: 18, backgroundColor: '#FFF' }} 
             />
             <TouchableHighlight 
-              onPress={() => false} 
+              onPress={() => this.props.enviarMensagem(this.props.mensagem)} 
               underlayColor='transparent'
             >
-                <Image source={enviarMensagem} />
+                <Image source={btnEnviarMensagem} />
             </TouchableHighlight>
           </View>
         </View>
@@ -41,7 +41,10 @@ const mapStateToProps = state => ({
     mensagem: state.AppReducer.mensagem
 });
 
-export default connect(mapStateToProps, { modificaMensagem })(Conversa);
+export default connect(mapStateToProps, { 
+  modificaMensagem, 
+  enviarMensagem 
+})(Conversa);
 
-// Aula 272
-// Iniciando Conversas - Parte 4 - Controlando o campo de mensagem com Redux
+// Aula 273
+// Iniciando Conversas - Parte 5 - Action Creator enviarMensagem

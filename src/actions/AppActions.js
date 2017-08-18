@@ -47,8 +47,8 @@ const adicionaContatoSucesso = dispatch => (
 );
 
 export const habilitaInclusaoContato = () => ({
-    type: ADICIONA_CONTATO_SUCESSO,
-    payload: false
+  type: ADICIONA_CONTATO_SUCESSO,
+  payload: false
 });
 
 export const modificaAdicionaContatoEmail = texto => ({
@@ -71,3 +71,8 @@ export const modificaMensagem = texto => ({
   type: MODIFICA_MENSAGEM,
   payload: texto
 });
+
+export const enviarMensagem = mensagem => {
+  console.log(mensagem);
+  return ({ type: 'xyz' });
+};
