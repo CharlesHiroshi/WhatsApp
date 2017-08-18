@@ -50,6 +50,3 @@ export default connect(mapStateToProps, {
   modificaMensagem, 
   enviarMensagem 
 })(Conversa);
-
-// Aula 274
-// Iniciando Conversas - Parte 6 - Enviando Parametros na navegação (Router Flux)

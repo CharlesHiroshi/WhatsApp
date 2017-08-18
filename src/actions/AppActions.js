@@ -73,8 +73,21 @@ export const modificaMensagem = texto => ({
 });
 
 export const enviarMensagem = (mensagem, contatoNome, contatoEmail) => {
-  console.log(mensagem);
-  console.log(contatoNome);
-  console.log(contatoEmail);
-  return ({ type: 'xyz' });
+  const { currentUser } = firebase.auth();
+  const usuarioEmail = currentUser.email;
+  return (dispatch) => {
+    const emailUsuarioB64 = b64.encode(usuarioEmail);
+    const contatoEmailB64 = b64.encode(contatoEmail);
+    firebase.database().ref(`/mensagens/${emailUsuarioB64}/${contatoEmailB64}`)
+    .push({ mensagem, tipo: 'e' })
+    .then(() => {
+      firebase.database().ref(
+        `/mensagens/${contatoEmailB64}/${emailUsuarioB64}`)
+      .push({ mensagem, tipo: 'r' })
+      .then(() => dispatch({ type: 'xyz' }));
+    });
+  };
 };
+
+// Aula 274
+// Iniciando Conversas - Parte 7 - Armazenando Mensagens no Firebase
