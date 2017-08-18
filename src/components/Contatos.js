@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { ImageBackground, ListView, View, Text } from 'react-native';
+import { ImageBackground, ListView, View, Text, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
 import _ from 'lodash';
 import { Card } from './common';
 import { contatosUsuarioFetch } from '../actions/AppActions';
@@ -24,6 +25,25 @@ class Contatos extends Component {
     this.fonteDeDados = ds.cloneWithRows(contatos);
   }
 
+  renderRow(contato) {
+    return (
+      <TouchableHighlight
+        onPress={() => Actions.conversa()}
+      >
+        <View
+          style={{ 
+          flex: 1, 
+          padding: 20, 
+          borderBottomWidth: 1, 
+          borderColor: '#CCC' }}
+        >
+          <Text style={{ fontSize: 25 }} >{contato.nome}</Text>
+          <Text style={{ fontSize: 18 }} >{contato.email}</Text>
+        </View>
+      </TouchableHighlight>
+    );
+  }
+
   render() {
     return (
       <ImageBackground style={{ flex: 1 }} source={bg}>
@@ -31,18 +51,7 @@ class Contatos extends Component {
           <ListView
             enableEmptySections
             dataSource={this.fonteDeDados}
-            renderRow={data => (
-              <View
-                style={{ 
-                flex: 1, 
-                padding: 20, 
-                borderBottomWidth: 1, 
-                borderColor: '#CCC' }} 
-              >
-                <Text style={{ fontSize: 25 }} >{data.nome}</Text>
-                <Text style={{ fontSize: 18 }} >{data.email}</Text>
-              </View>
-            )}
+            renderRow={this.renderRow}
           />
         </Card>
       </ImageBackground>
@@ -59,5 +68,5 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, { contatosUsuarioFetch })(Contatos);
 
-// Aula 268
-// Listando contatos - parte 10 - Melhorando o Visual
+// Aula 270
+// Iniciando Conversas - Parte 2 - Criando e Navegando até o Componente Conversa
