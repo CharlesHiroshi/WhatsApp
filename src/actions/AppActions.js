@@ -19,9 +19,9 @@ export const adicionaContato = email => dispatch => {
           const { currentUser } = firebase.auth();
           const emailUsuarioB64 = b64.encode(currentUser.email);
           firebase.database().ref(`/usuario_contatos/${emailUsuarioB64}`)
-            .push({ email, nome: dadosContato.nome })
-            .then(() => adicionaContatoSucesso(dispatch))
-            .catch(erro => adicionaContatoErro(erro.message, dispatch));
+          .push({ email, nome: dadosContato.nome })
+          .then(() => adicionaContatoSucesso(dispatch))
+          .catch(erro => adicionaContatoErro(erro.message, dispatch));
         } else {
           dispatch(
             { type: ADICIONA_CONTATO_ERRO, 
@@ -85,9 +85,25 @@ export const enviarMensagem = (mensagem, contatoNome, contatoEmail) => {
         `/mensagens/${contatoEmailB64}/${emailUsuarioB64}`)
       .push({ mensagem, tipo: 'r' })
       .then(() => dispatch({ type: 'xyz' }));
+    })
+    .then(() => {
+      firebase.database().ref(
+        `/usuario_conversas/${emailUsuarioB64}/${contatoEmailB64}`)
+      .set({ nome: contatoNome, email: contatoEmail });
+      })
+    .then(() => {
+      firebase.database().ref(`/contatos/${emailUsuarioB64}`)
+      .once('value')
+      .then(snapshot => {
+        const dadosUsuario = _.first(_.values(snapshot.val()));
+        console.log(dadosUsuario.nome);
+        firebase.database().ref(
+          `/usuario_conversas/${contatoEmailB64}/${emailUsuarioB64}`)
+        .set({ nome: dadosUsuario.nome, email: usuarioEmail });
+      });
     });
   };
 };
 
-// Aula 274
-// Iniciando Conversas - Parte 7 - Armazenando Mensagens no Firebase
+// Aula 276
+// Iniciando Conversas - Parte 8 - Armazenando o cabeçalho das conversas
