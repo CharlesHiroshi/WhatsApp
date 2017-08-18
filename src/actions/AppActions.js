@@ -90,7 +90,7 @@ export const enviarMensagem = (mensagem, contatoNome, contatoEmail) => {
       firebase.database().ref(
         `/usuario_conversas/${emailUsuarioB64}/${contatoEmailB64}`)
       .set({ nome: contatoNome, email: contatoEmail });
-      })
+    })
     .then(() => {
       firebase.database().ref(`/contatos/${emailUsuarioB64}`)
       .once('value')
@@ -104,6 +104,3 @@ export const enviarMensagem = (mensagem, contatoNome, contatoEmail) => {
     });
   };
 };
-
-// Aula 276
-// Iniciando Conversas - Parte 8 - Armazenando o cabeçalho das conversas
