@@ -28,6 +28,7 @@ class Contatos extends Component {
   renderRow(contato) {
     return (
       <TouchableHighlight
+        underlayColor='transparent'
         onPress={() => Actions.conversa()}
       >
         <View
@@ -67,6 +68,3 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, { contatosUsuarioFetch })(Contatos);
-
-// Aula 270
-// Iniciando Conversas - Parte 2 - Criando e Navegando até o Componente Conversa
