@@ -72,7 +72,9 @@ export const modificaMensagem = texto => ({
   payload: texto
 });
 
-export const enviarMensagem = mensagem => {
+export const enviarMensagem = (mensagem, contatoNome, contatoEmail) => {
   console.log(mensagem);
+  console.log(contatoNome);
+  console.log(contatoEmail);
   return ({ type: 'xyz' });
 };

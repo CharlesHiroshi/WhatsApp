@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-import { ImageBackground, ListView, View, Text, TouchableHighlight } from 'react-native';
+import { 
+  ImageBackground, 
+  ListView, 
+  View, 
+  Text, 
+  TouchableHighlight 
+} from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import _ from 'lodash';
@@ -29,7 +35,11 @@ class Contatos extends Component {
     return (
       <TouchableHighlight
         underlayColor='transparent'
-        onPress={() => Actions.conversa()}
+        onPress={() => Actions.conversa({ 
+          title: contato.nome,
+          contatoNome: contato.nome, 
+          contatoEmail: contato.email 
+        })}
       >
         <View
           style={{ 

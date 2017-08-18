@@ -13,19 +13,24 @@ const bg = require('../imgs/bg.png');
 const btnEnviarMensagem = require('../imgs/enviar_mensagem.png');
 
 class Conversa extends Component {
+  _enviarMensagem() {
+    const { mensagem, contatoNome, contatoEmail } = this.props;
+    this.props.enviarMensagem(mensagem, contatoNome, contatoEmail);
+  }
+
   render() {
     return (
       <ImageBackground style={{ flex: 1 }} source={bg}>
         <View style={{ flex: 1, marginTop: 50, padding: 10 }}>
           <View style={{ flex: 1, paddingBottom: 20 }}></View>
-          <View style={{ flexDirection: 'row', height: 60 }}>
+          <View style={{ flexDirection: 'row', height: 45 }}>
             <TextInput 
               value={this.props.mensagem}
               onChangeText={texto => this.props.modificaMensagem(texto)}
               style={{ flex: 4, fontSize: 18, backgroundColor: '#FFF' }} 
             />
             <TouchableHighlight 
-              onPress={() => this.props.enviarMensagem(this.props.mensagem)} 
+              onPress={this._enviarMensagem.bind(this)} 
               underlayColor='transparent'
             >
                 <Image source={btnEnviarMensagem} />
@@ -46,5 +51,5 @@ export default connect(mapStateToProps, {
   enviarMensagem 
 })(Conversa);
 
-// Aula 273
-// Iniciando Conversas - Parte 5 - Action Creator enviarMensagem
+// Aula 274
+// Iniciando Conversas - Parte 6 - Enviando Parametros na navegação (Router Flux)
