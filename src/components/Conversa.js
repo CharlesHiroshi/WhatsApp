@@ -7,12 +7,21 @@ import {
   ImageBackground, 
   TouchableHighlight 
 } from 'react-native';
-import { modificaMensagem, enviarMensagem } from '../actions/AppActions';
+import _ from 'lodash';
+import { 
+  modificaMensagem, 
+  enviarMensagem, 
+  conversaUsuarioFetch 
+} from '../actions/AppActions';
 
 const bg = require('../imgs/bg.png');
 const btnEnviarMensagem = require('../imgs/enviar_mensagem.png');
 
 class Conversa extends Component {
+  componentWillMount() {
+    this.props.conversaUsuarioFetch(this.props.contatoEmail);
+  }
+
   _enviarMensagem() {
     const { mensagem, contatoNome, contatoEmail } = this.props;
     this.props.enviarMensagem(mensagem, contatoNome, contatoEmail);
@@ -42,11 +51,18 @@ class Conversa extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = state => {
+  const conversa = _.map(
+    state.ListaConversaReducer, (val, uid) => ({ ...val, uid }));
+  console.log(conversa);
+  return ({
+    conversa,
     mensagem: state.AppReducer.mensagem
-});
+  });
+};
 
 export default connect(mapStateToProps, { 
   modificaMensagem, 
-  enviarMensagem 
+  enviarMensagem,
+  conversaUsuarioFetch 
 })(Conversa);

@@ -118,5 +118,5 @@ export const conversaUsuarioFetch = contatoEmail => {
   };
 };
 
-// Aula 278
-// Trocando Mensagens - Parte 2 - Criando Action Creator conversaUsuarioFetch
+// Aula 279
+// Trocando Mensagens - Parte 3 - Recuperando mensagens
