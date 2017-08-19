@@ -134,5 +134,5 @@ export default connect(mapStateToProps, {
   conversaUsuarioFetch 
 })(Conversa);
 
-// Aula 281
-// Trocando Mensagens - Parte 5 - Melhorando Visual
+// Aula 282
+// Trocando Mensagens - Parte 5 - Limpando o campo de envio de mensagens após o envio
