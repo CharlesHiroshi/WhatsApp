@@ -117,6 +117,3 @@ export const conversaUsuarioFetch = contatoEmail => {
     });
   };
 };
-
-// Aula 279
-// Trocando Mensagens - Parte 3 - Recuperando mensagens

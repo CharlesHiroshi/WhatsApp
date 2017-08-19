@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { 
   View, 
+  Text,
   TextInput, 
   Image, 
   ImageBackground, 
-  TouchableHighlight 
+  TouchableHighlight,
+  ListView
 } from 'react-native';
 import _ from 'lodash';
 import { 
@@ -20,6 +22,17 @@ const btnEnviarMensagem = require('../imgs/enviar_mensagem.png');
 class Conversa extends Component {
   componentWillMount() {
     this.props.conversaUsuarioFetch(this.props.contatoEmail);
+    this.criaFonteDeDados(this.props.conversa);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.criaFonteDeDados(nextProps.conversa);
+  }
+
+  criaFonteDeDados(conversa) {
+    const ds = new ListView.DataSource({ 
+      rowHasChanged: (r1, r2) => r1 !== r2 });
+    this.dataSource = ds.cloneWithRows(conversa);
   }
 
   _enviarMensagem() {
@@ -27,11 +40,26 @@ class Conversa extends Component {
     this.props.enviarMensagem(mensagem, contatoNome, contatoEmail);
   }
 
+  renderRow(texto) {
+    return (
+      <View>
+        <Text>{texto.mensagem}</Text>
+        <Text>{texto.tipo}</Text>
+      </View>
+    );
+  }
+
   render() {
     return (
       <ImageBackground style={{ flex: 1 }} source={bg}>
         <View style={{ flex: 1, marginTop: 50, padding: 10 }}>
-          <View style={{ flex: 1, paddingBottom: 20 }}></View>
+          <View style={{ flex: 1, paddingBottom: 20 }}>
+            <ListView
+              enableEmptySections
+              dataSource={this.dataSource}
+              renderRow={this.renderRow}
+            />
+          </View>
           <View style={{ flexDirection: 'row', height: 45 }}>
             <TextInput 
               value={this.props.mensagem}
@@ -54,7 +82,6 @@ class Conversa extends Component {
 const mapStateToProps = state => {
   const conversa = _.map(
     state.ListaConversaReducer, (val, uid) => ({ ...val, uid }));
-  console.log(conversa);
   return ({
     conversa,
     mensagem: state.AppReducer.mensagem
@@ -66,3 +93,6 @@ export default connect(mapStateToProps, {
   enviarMensagem,
   conversaUsuarioFetch 
 })(Conversa);
+
+// Aula 280
+// Trocando Mensagens - Parte 4 - Exibindo mensagens
