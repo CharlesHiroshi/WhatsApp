@@ -41,10 +41,50 @@ class Conversa extends Component {
   }
 
   renderRow(texto) {
+    if (texto.tipo === 'e') {
+      return (
+        <View
+          style={{ 
+            alignItems: 'flex-end', 
+            marginTop: 5, 
+            marginBottom: 5, 
+            marginLeft: 40 
+          }}
+        >
+          <Text 
+            style={{ 
+              fontSize: 18, 
+              color: '#000', 
+              padding: 10, 
+              backgroundColor: '#DBF5B4', 
+              elevation: 1 
+            }}
+          >
+            {texto.mensagem}
+          </Text>
+        </View>
+      );      
+    }
     return (
-      <View>
-        <Text>{texto.mensagem}</Text>
-        <Text>{texto.tipo}</Text>
+      <View
+        style={{ 
+          alignItems: 'flex-start', 
+          marginTop: 5, 
+          marginBottom: 5, 
+          marginRight: 40 
+        }}
+      >
+        <Text 
+          style={{ 
+            fontSize: 18, 
+            color: '#000', 
+            padding: 10, 
+            backgroundColor: '#F7F7F7', 
+            elevation: 1 
+          }}
+        >
+          {texto.mensagem}
+        </Text>
       </View>
     );
   }
@@ -94,5 +134,5 @@ export default connect(mapStateToProps, {
   conversaUsuarioFetch 
 })(Conversa);
 
-// Aula 280
-// Trocando Mensagens - Parte 4 - Exibindo mensagens
+// Aula 281
+// Trocando Mensagens - Parte 5 - Melhorando Visual
