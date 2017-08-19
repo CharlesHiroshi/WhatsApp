@@ -6,29 +6,29 @@ import {
   ADICIONA_CONTATO_ERRO,
   ADICIONA_CONTATO_SUCESSO,
   LISTA_CONTATOS_USUARIO,
-  MODIFICA_MENSAGEM
+  MODIFICA_MENSAGEM,
+  LISTA_CONVERSA_USUARIO
 } from './types';
 
 export const adicionaContato = email => dispatch => {
-    const emailContatoB64 = b64.encode(email);
-    firebase.database().ref(`/contatos/${emailContatoB64}`)
-      .once('value')
-      .then(snapshot => {
-        if (snapshot.val()) {
-          const dadosContato = _.first(_.values(snapshot.val()));
-          const { currentUser } = firebase.auth();
-          const emailUsuarioB64 = b64.encode(currentUser.email);
-          firebase.database().ref(`/usuario_contatos/${emailUsuarioB64}`)
-          .push({ email, nome: dadosContato.nome })
-          .then(() => adicionaContatoSucesso(dispatch))
-          .catch(erro => adicionaContatoErro(erro.message, dispatch));
-        } else {
-          dispatch(
-            { type: ADICIONA_CONTATO_ERRO, 
-              payload: 'E-mail informado não corresponde a um usuário válido!'
-            }
-          );
-        }
+  const emailContatoB64 = b64.encode(email);
+  firebase.database().ref(`/contatos/${emailContatoB64}`)
+    .once('value')
+    .then(snapshot => {
+    if (snapshot.val()) {
+      const dadosContato = _.first(_.values(snapshot.val()));
+      const { currentUser } = firebase.auth();
+      const emailUsuarioB64 = b64.encode(currentUser.email);
+      firebase.database().ref(`/usuario_contatos/${emailUsuarioB64}`)
+      .push({ email, nome: dadosContato.nome })
+      .then(() => adicionaContatoSucesso(dispatch))
+      .catch(erro => adicionaContatoErro(erro.message, dispatch));
+    } else {
+      dispatch({ 
+        type: ADICIONA_CONTATO_ERRO, 
+        payload: 'E-mail informado não corresponde a um usuário válido!'
+      });
+    }
   });
 };
 
@@ -104,3 +104,19 @@ export const enviarMensagem = (mensagem, contatoNome, contatoEmail) => {
     });
   };
 };
+
+export const conversaUsuarioFetch = contatoEmail => {
+  const { currentUser } = firebase.auth();
+  const usuarioEmail = currentUser.email;
+  const emailUsuarioB64 = b64.encode(usuarioEmail);
+  const contatoEmailB64 = b64.encode(contatoEmail);
+  return dispatch => {
+    firebase.database().ref(`/mensagens/${emailUsuarioB64}/${contatoEmailB64}`)
+    .on('value', snapshot => {
+      dispatch({ type: LISTA_CONVERSA_USUARIO, payload: snapshot.val() });
+    });
+  };
+};
+
+// Aula 278
+// Trocando Mensagens - Parte 2 - Criando Action Creator conversaUsuarioFetch
