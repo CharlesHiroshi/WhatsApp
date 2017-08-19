@@ -26,6 +26,9 @@ class Conversa extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    if (this.props.contatoEmail !== nextProps.contatoEmail) {
+      this.props.conversaUsuarioFetch(nextProps.contatoEmail);
+    }
     this.criaFonteDeDados(nextProps.conversa);
   }
 
@@ -134,5 +137,5 @@ export default connect(mapStateToProps, {
   conversaUsuarioFetch 
 })(Conversa);
 
-// Aula 282
-// Trocando Mensagens - Parte 5 - Limpando o campo de envio de mensagens após o envio
+// Aula 283
+// Trocando Mensagens - Parte 7 - Resolvendo conflitos do Ciclo de vida
