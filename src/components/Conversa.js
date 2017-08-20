@@ -136,6 +136,3 @@ export default connect(mapStateToProps, {
   enviarMensagem,
   conversaUsuarioFetch 
 })(Conversa);
-
-// Aula 285
-// Listando conversas - Parte 2 - Criando ListaConversasReducer
