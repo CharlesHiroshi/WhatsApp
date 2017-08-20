@@ -74,12 +74,7 @@ const mapStateToProps = state => {
     state.ListaConversasReducer, (val, uid) => ({ ...val, uid }));
   return ({
     conversas,
-    // mensagem: state.AppReducer.mensagem
   });
 };
 
 export default connect(mapStateToProps, { conversasUsuarioFetch })(Conversas);
-
-// Aula 290
-// Listando conversas - Parte 7 - Exibindo Conversas, Retomando Conversas e 
-// Navegando entre conversas

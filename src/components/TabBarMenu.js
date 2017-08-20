@@ -8,6 +8,7 @@ import {
   TouchableHighlight 
 } from 'react-native';
 import { connect } from 'react-redux';
+import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
 import { TabBar } from 'react-native-tab-view';
 import { 
@@ -29,8 +30,7 @@ const TabBarMenu = props => (
           <View style={estilos.imageViewStyle}>
             <TouchableHighlight
               onPress={() => { 
-                Actions.adicionarContato(); 
-                props.habilitaInclusaoContato();
+                firebase.auth().signOut().then(() => Actions.formLogin());
               }}
               underlayColor={'transparent'}
             >
@@ -38,7 +38,15 @@ const TabBarMenu = props => (
             </TouchableHighlight>
           </View>
           <View style={estilos.sairViewStyle}>
-            <Text style={estilos.sairTextStyle} >Sair</Text>
+            <TouchableHighlight
+                onPress={() => { 
+                  Actions.adicionarContato(); 
+                  props.habilitaInclusaoContato();
+                }}
+                underlayColor={'transparent'}
+            >
+              <Text style={estilos.sairTextStyle} >Sair</Text>
+            </TouchableHighlight>
           </View>
         </View>
       </View>
@@ -89,3 +97,6 @@ const estilos = StyleSheet.create({
     elevation: 0
   }
 }); 
+
+// Aula 291
+// Encerrando sessão (logout) no Firebase
