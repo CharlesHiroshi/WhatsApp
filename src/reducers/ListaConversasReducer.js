@@ -10,6 +10,3 @@ export default (state = INITIAL_STATE, action) => {
       return state;
   }
 };
-
-// Aula 286
-// Listando conversas - Parte 3 - Criando Action Creator conversasUsuarioFetch

@@ -98,7 +98,6 @@ export const enviarMensagem = (mensagem, contatoNome, contatoEmail) => {
       .once('value')
       .then(snapshot => {
         const dadosUsuario = _.first(_.values(snapshot.val()));
-        console.log(dadosUsuario.nome);
         firebase.database().ref(
           `/usuario_conversas/${contatoEmailB64}/${emailUsuarioB64}`)
         .set({ nome: dadosUsuario.nome, email: usuarioEmail });
