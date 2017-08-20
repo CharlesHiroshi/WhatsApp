@@ -7,6 +7,7 @@ import {
   TouchableHighlight 
 } from 'react-native';
 import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
 import _ from 'lodash';
 import { Card } from './common';
 import { conversasUsuarioFetch } from '../actions/AppActions';
@@ -17,12 +18,10 @@ class Conversas extends Component {
   componentWillMount() {
     this.props.conversasUsuarioFetch();
     this.criaFonteDeDados(this.props.conversas);
-    console.log('componentWillMount: ', this.props.conversas);
   }
 
   componentWillReceiveProps(nextProps) {
     this.criaFonteDeDados(nextProps.conversas);
-    console.log('componentWillReceiveProps: ', nextProps.conversas);
   }
 
   criaFonteDeDados(conversas) {
@@ -34,26 +33,24 @@ class Conversas extends Component {
 
   renderRow(conversa) {
     return (
-      <View><Text>{conversa.nome}</Text></View>
-      // <TouchableHighlight
-      //   underlayColor='transparent'
-      //   onPress={() => Actions.conversa({ 
-      //     title: contato.nome,
-      //     contatoNome: contato.nome, 
-      //     contatoEmail: contato.email 
-      //   })}
-      // >
-      //   <View
-      //     style={{ 
-      //     flex: 1, 
-      //     padding: 20, 
-      //     borderBottomWidth: 1, 
-      //     borderColor: '#CCC' }}
-      //   >
-      //     <Text style={{ fontSize: 25 }} >{contato.nome}</Text>
-      //     <Text style={{ fontSize: 18 }} >{contato.email}</Text>
-      //   </View>
-      // </TouchableHighlight>
+      <TouchableHighlight
+        underlayColor='transparent'
+        onPress={() => Actions.conversa({ 
+          title: conversa.nome,
+          contatoNome: conversa.nome, 
+          contatoEmail: conversa.email 
+        })}
+      >
+        <View
+          style={{ 
+          flex: 1, 
+          padding: 20, 
+          borderBottomWidth: 1, 
+          borderColor: '#CCC' }}
+        >
+          <Text style={{ fontSize: 25 }} >{conversa.nome}</Text>
+        </View>
+      </TouchableHighlight>
     );
   }
 
@@ -83,5 +80,6 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, { conversasUsuarioFetch })(Conversas);
 
-// Aula 288
-// Listando conversas - Parte 5 - Exibindo Conversas
+// Aula 290
+// Listando conversas - Parte 7 - Exibindo Conversas, Retomando Conversas e 
+// Navegando entre conversas
