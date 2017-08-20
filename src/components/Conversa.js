@@ -137,5 +137,5 @@ export default connect(mapStateToProps, {
   conversaUsuarioFetch 
 })(Conversa);
 
-// Aula 283
-// Trocando Mensagens - Parte 7 - Resolvendo conflitos do Ciclo de vida
+// Aula 285
+// Listando conversas - Parte 2 - Criando ListaConversasReducer
