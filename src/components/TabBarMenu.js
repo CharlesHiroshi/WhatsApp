@@ -29,21 +29,21 @@ const TabBarMenu = props => (
         <View style={estilos.optionsViewStyle}>
           <View style={estilos.imageViewStyle}>
             <TouchableHighlight
-              onPress={() => { 
-                firebase.auth().signOut().then(() => Actions.formLogin());
-              }}
-              underlayColor={'transparent'}
+            onPress={() => { 
+                  Actions.adicionarContato(); 
+                  props.habilitaInclusaoContato();
+                }}
+                underlayColor={'transparent'}
             >
               <Image source={contato} />
             </TouchableHighlight>
           </View>
           <View style={estilos.sairViewStyle}>
             <TouchableHighlight
-                onPress={() => { 
-                  Actions.adicionarContato(); 
-                  props.habilitaInclusaoContato();
-                }}
-                underlayColor={'transparent'}
+            onPress={() => { 
+                firebase.auth().signOut().then(() => Actions.formLogin());
+              }}
+              underlayColor={'transparent'}
             >
               <Text style={estilos.sairTextStyle} >Sair</Text>
             </TouchableHighlight>
@@ -98,5 +98,5 @@ const estilos = StyleSheet.create({
   }
 }); 
 
-// Aula 291
-// Encerrando sessão (logout) no Firebase
+// Aula 292
+// Atualizando variáveis de estado no processo de autenticação
